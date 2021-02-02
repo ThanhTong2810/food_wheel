@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "465212384224",
+    "project_id": "wheel-app-eb85b",
+    "storage_bucket": "wheel-app-eb85b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465212384224:android:4d67f552fe60d1a5a6c185",
+        "android_client_info": {
+          "package_name": "com.example.food_wheel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465212384224-iq9nvok7n6br8vg6109de6tbljhjius5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMHD0NFJjlzk3mE58phalNwatePt_rHG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465212384224-iq9nvok7n6br8vg6109de6tbljhjius5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "465212384224-ehug472oa7h70b025nrog5iqqcl1gm83.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodWheel"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
