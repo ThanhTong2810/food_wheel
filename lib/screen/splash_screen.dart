@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_wheel/controller/food_controller.dart';
 import 'package:food_wheel/res/images/images.dart';
 import 'package:food_wheel/screen/menu_screen/menu_screen.dart';
 import 'package:food_wheel/theme/colors.dart';
@@ -14,11 +15,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin{
-
+  final FoodController foodController=Get.find();
   Timer timer;
-  List<String> category;
-  List<String> priority = ['Slow', 'Medium', 'High'];
-  List<String> status = ['Processing', 'Done', 'Pending'];
 
   ///~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~///
   ///           OVERRIDE METHODS           ///
@@ -62,8 +60,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   ///             OTHER METHODS            ///
   ///~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~///
   onBuildDone() async {
+    await foodController.getFood();
     /// Delay 3 seconds, then navigate to Login screen
-
     timer=Timer.periodic(Duration(seconds: 2), (timer) async {
         _navigateToMainScreen();
     });

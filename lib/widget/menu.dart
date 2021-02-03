@@ -71,42 +71,6 @@ class _MenuScreenState extends State<MenuScreen> with TickerProviderStateMixin {
 
     return AnimatedBuilder(
         animation: titleAnimationController,
-        child: OverflowBox(
-          maxWidth: double.infinity,
-          alignment: Alignment.topLeft,
-          child: Obx((){
-            return Container(
-              padding: const EdgeInsets.only(left:50.0, right: 50.0,top: 90),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    child: SizedBox(
-                      height: getScreenHeight(context) / 10,
-                      width:getScreenHeight(context) / 10,
-                      child: CachedNetworkImage(
-                        width: getScreenWidth(context),
-                        fit: BoxFit.fitWidth,
-                        imageUrl: null,
-                        imageBuilder: (context, imageProvider) => CircleAvatar(
-                          backgroundImage: imageProvider,
-                        ),
-                        placeholder: (context, url) => Shimmer.fromColors(
-                            baseColor: Colors.grey[400],
-                            highlightColor: Colors.white,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.transparent,
-                            )),
-                        errorWidget: (context, url, error) => Icon(Icons.person),
-                      ),
-                    ),
-                  ),
-                  Dimens.height10,
-                  AppText(text: '-------------->NAME',color: AppColors.white,)
-                ],
-              ),
-            );
-          }),
-        ),
         builder: (BuildContext context, Widget child) {
           return Transform(
             transform: Matrix4.translationValues(

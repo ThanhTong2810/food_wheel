@@ -4,6 +4,6 @@ class Constants {
   static const int DRINK = 2;
 
   ///Firestore
-  static const String CATEGORY = 'FOOD';
-  static const String NOTES = 'DRINK';
+  static const String FOODS = 'FOODS';
+  static const String DRINKS = 'DRINKS';
 }

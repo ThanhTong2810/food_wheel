@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_wheel/controller/app_controller.dart';
+import 'package:food_wheel/controller/drink_controller.dart';
+import 'package:food_wheel/controller/food_controller.dart';
+import 'package:food_wheel/controller/wheel_controller.dart';
 import 'package:food_wheel/localization/flutter_localizations_delegate.dart';
 import 'package:food_wheel/screen/splash_screen.dart';
 import 'package:food_wheel/theme/colors.dart';
@@ -33,7 +36,9 @@ class _AppState extends State<WheelApp> {
       () {
         return GetMaterialApp(
             initialBinding: BindingsBuilder(() {
-
+              Get.put(WheelController());
+              Get.put(FoodController());
+              Get.put(DrinkController());
             }),
             color: AppColors.primary,
             debugShowCheckedModeBanner: false,
