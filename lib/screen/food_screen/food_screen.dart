@@ -33,61 +33,41 @@ class _FoodScreenState extends State<FoodScreen> {
       new TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    onWidgetBuildDone(() async{
+      foodController.listFood=await foodController.getFood();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: getScreenWidth(context),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: StreamBuilder(
-                stream: foodController.getAllFood(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError || !snapshot.hasData)
-                    return Center(
-                      child: AppText(
-                        text: 'No Food',
-                      ),
-                    );
-                  return ListView.builder(
-                      padding: EdgeInsets.zero,
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        Food food = snapshot.data[index];
-                        return Container(
-                          padding: EdgeInsets.all(15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              AppCard(
-                                imageUrl: food.imageUrl,
-                                name: food.name,
-                                address: food.address,
-                              ),
-                            ],
-                          ),
-                        );
-                      });
-                },
-              ),
-            ),
-          ],
+    return Obx((){
+      return Scaffold(
+        body: ListView(
+          padding: EdgeInsets.zero,
+          children: foodController.listFood.map((e){
+            return AppCard(
+              imageUrl: e.imageUrl,
+              name: e.name,
+              address: e.address,
+            );
+          }).toList(),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        heroTag: 'add food',
-        child: Icon(Icons.add_business_sharp),
-        backgroundColor: AppColors.primary,
-        onPressed: () {
-          // foodController.image.value=null;
-          // nameTextEditingController.text='';
-          // addressTextEditingController.text='';
-          // foodController.msgErr.value='';
-          // _addNoteModalBottomSheet(context);
-        },
-      ),
-    );
+        floatingActionButton: FloatingActionButton(
+          heroTag: 'add food',
+          child: Icon(Icons.add_business_sharp),
+          backgroundColor: AppColors.primary,
+          onPressed: () {
+            // foodController.image.value=null;
+            // nameTextEditingController.text='';
+            // addressTextEditingController.text='';
+            // foodController.msgErr.value='';
+            // _addNoteModalBottomSheet(context);
+          },
+        ),
+      );
+    });
   }
 
   // void _addNoteModalBottomSheet(context) {

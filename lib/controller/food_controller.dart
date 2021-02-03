@@ -15,14 +15,7 @@ class FoodController extends GetxController {
   Rx<PickedFile> image = Rx<PickedFile>(null);
   Rx<String> msgErr = Rx<String>('');
   ImagePicker imagePicker = ImagePicker();
-
-  Stream<List<Food>> getAllFood() {
-    return FirebaseHelper.fireStoreReference
-        .collection(Constants.FOODS)
-        .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => Food.fromJson(doc.data())).toList());
-  }
+  RxList<Food> listFood=RxList<Food>([]);
 
   // addFood({String name, String address}) async {
   //   isShowLoading.value = true;

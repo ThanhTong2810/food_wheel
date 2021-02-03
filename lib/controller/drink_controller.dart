@@ -6,14 +6,7 @@ import 'package:get/get.dart';
 
 class DrinkController extends GetxController{
   Rx<bool> isShowLoading = Rx<bool>(false);
-
-  Stream<List<Drink>> getAllDrink() {
-    return FirebaseHelper.fireStoreReference
-        .collection(Constants.DRINKS)
-        .snapshots()
-        .map((snapshot) =>
-        snapshot.docs.map((doc) => Drink.fromJson(doc.data())).toList());
-  }
+  RxList<Drink> listDrink=RxList<Drink>([]);
 
   getDrink() async {
     QuerySnapshot snapshot = await FirebaseHelper.fireStoreReference

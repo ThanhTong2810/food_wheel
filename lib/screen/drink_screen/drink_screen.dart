@@ -28,61 +28,41 @@ class _DrinkScreenState extends State<DrinkScreen> {
   TextEditingController addressTextEditingController = new TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    onWidgetBuildDone(() async{
+      drinkController.listDrink=await drinkController.getDrink();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: getScreenWidth(context),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
-              child: StreamBuilder(
-                stream: drinkController.getAllDrink(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError || !snapshot.hasData)
-                    return Center(
-                      child: AppText(
-                        text: 'No Drink',
-                      ),
-                    );
-                  return ListView.builder(
-                      padding: EdgeInsets.zero,
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        Drink drink = snapshot.data[index];
-                        return Container(
-                          padding: EdgeInsets.all(15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              AppCard(
-                                imageUrl: drink.imageUrl,
-                                name: drink.name,
-                                address: drink.address,
-                              ),
-                            ],
-                          ),
-                        );
-                      });
-                },
-              ),
-            ),
-          ],
+    return Obx((){
+      return Scaffold(
+        body: ListView(
+          padding: EdgeInsets.zero,
+          children: drinkController.listDrink.map((e){
+            return AppCard(
+              imageUrl: e.imageUrl,
+              name: e.name,
+              address: e.address,
+            );
+          }).toList(),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        heroTag: 'add drink',
-        child: Icon(Icons.add_business_sharp),
-        backgroundColor: AppColors.primary,
-        onPressed: () {
-          // foodController.image.value=null;
-          // nameTextEditingController.text='';
-          // addressTextEditingController.text='';
-          // foodController.msgErr.value='';
-          // _addNoteModalBottomSheet(context);
-        },
-      ),
-    );
+        floatingActionButton: FloatingActionButton(
+          heroTag: 'add drink',
+          child: Icon(Icons.add_business_sharp),
+          backgroundColor: AppColors.primary,
+          onPressed: () {
+            // foodController.image.value=null;
+            // nameTextEditingController.text='';
+            // addressTextEditingController.text='';
+            // foodController.msgErr.value='';
+            // _addNoteModalBottomSheet(context);
+          },
+        ),
+      );
+    });
   }
 
   // void _addNoteModalBottomSheet(context) {
